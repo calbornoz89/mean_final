@@ -1,0 +1,17 @@
+<div flex-container="column"  flex-align="space-between center">
+      <div class="p+ pt0">
+        <form name="new_login_form">
+        <h1>Pokedex</h1>
+          <lx-text-field lx-label="Username" lx-allow-clear="true">
+              <input type="text" name="username" ng-model="login.username" ng-required="true">
+          </lx-text-field>
+            <label ng-if="new_login_form.username.$error.required && new_login_form.username.$dirty" style="color:red">El campo es requerido</label>
+          <lx-text-field lx-label="Password" lx-allow-clear="true">
+              <input type="password" ng-model="login.password" ng-required="true" name="password">
+          </lx-text-field>
+            <label ng-if="new_login_form.password.$error.required && new_login_form.password.$dirty" style="color:red">El campo es requerido</label>
+            <br>
+          <lx-button  ng-disabled="new_login_form.$invalid" lx-type="raised" ng-click="login.login(login.username,login.password)">Login</lx-button>
+          </form>
+      </div>
+</div>

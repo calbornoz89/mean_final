@@ -1,0 +1,109 @@
+<div class="p+" ng-controller="mainCtrl as main">
+    <lx-button lx-type="flat" ng-click="main.goTo('/users')">Usuarios</lx-button>
+    <lx-button lx-type="flat" ng-click="main.goTo('/pokemons')">Pokemons</lx-button>
+</div>
+
+    <div flex-item="12">
+        <span class="fs-title display-block mb">Usuarios</span>
+        <div flex-item>
+            <div class="card">
+                <div class="toolbar">
+                    <lx-search-filter>
+                        <input type="text" ng-model="user.searchUser" ng-change="user.search()">
+                    </lx-search-filter>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div flex-item="12" class="p+">
+        <lx-button lx-type="fab" ng-click="user.add();">
+            <i class="mdi mdi-plus"></i>
+        </lx-button>
+    </div>
+
+    <div flex-item="12">
+
+        <ul class="list mt++">
+            <li class="list-row list-row--has-separator" ng-repeat="item in user.users">
+
+                <div class="list-row__content">
+                    <span>{{item.name}}</span>
+                    <span class="display-block fs-body-1 tc-black-2">{{item.username}}</span>
+                </div>
+                <div class="list-row__secondary">
+                    <lx-icon lx-id="information" lx-size="xs" lx-color="indigo" lx-type="flat" ng-click="user.openDialog(item._id)"></lx-icon>
+                    <lx-icon lx-id="pencil" lx-size="xs" lx-color="indigo" lx-type="flat" ng-click="user.edit(item._id)"></lx-icon>
+                    <lx-icon lx-id="delete" lx-size="xs" lx-color="indigo" lx-type="flat" ng-click="user.delete(item._id)"></lx-icon>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <lx-dialog id="{{ user.dialogId }}" class="dialog dialog--l" auto-close="true">
+        <lx-dialog-header>
+            <div class="toolbar bgc-primary pl++">
+                <span class="toolbar__label tc-white fs-title">Informacion de usuario</span>
+            </div>
+        </lx-dialog-header>
+        <lx-dialog-content>
+    <div class="card">
+        <div flex-container="row">
+            <div class="card__img card__img--left" style="height: 60px">
+              <svg style="width:60px;height:60px" viewBox="0 0 24 24">
+                <path fill="#000000" d="M12,19.2C9.5,19.2 7.29,17.92 6,16C6.03,14 10,12.9 12,12.9C14,12.9 17.97,14 18,16C16.71,17.92 14.5,19.2 12,19.2M12,5A3,3 0 0,1 15,8A3,3 0 0,1 12,11A3,3 0 0,1 9,8A3,3 0 0,1 12,5M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12C22,6.47 17.5,2 12,2Z" />
+              </svg>
+            </div>
+
+            <div flex-item flex-container="column">
+                <div flex-item>
+                    <div class="p+">
+                        <strong class="fs-headline display-block">{{user.infoUser.name}}</strong>
+                        <span class="fs-subhead tc-black-2 display-block">{{user.infoUser.username}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </lx-dialog-content>
+
+        <lx-dialog-footer>
+            <lx-button lx-type="flat" lx-dialog-close>Ok</lx-button>
+        </lx-dialog-footer>
+    </lx-dialog>
+
+    <lx-dialog id="{{ user.dialogIdEdit }}" auto-close="true" >
+        <lx-dialog-header>
+            <div class="toolbar bgc-primary pl++">
+                <span class="toolbar__label tc-white fs-title">Datos de Usuario</span>
+            </div>
+        </lx-dialog-header>
+        <lx-dialog-content>
+              <form name="new_user_form" ng-submit="submitForm()">
+                <div class="p+">
+                    <input type="hidden" name="_id" ng-model="user.model._id">
+
+                    <lx-text-field lx-label="Name">
+                        <input type="text" name="name" ng-required="true" ng-model="user.model.name">
+                    </lx-text-field>
+
+                    <label ng-if="new_user_form.name.$error.required && new_user_form.name.$dirty" style="color:red">El campo es requerido</label>
+
+                    <lx-text-field lx-label="UserName">
+                        <input type="text" name="username" ng-required="true" ng-model="user.model.username">
+                    </lx-text-field>
+
+                    <label ng-if="new_user_form.username.$error.required && new_user_form.username.$dirty" style="color:red">El campo es requerido</label>
+
+                    <lx-text-field lx-label="Password">
+                        <input type="password" name="password" ng-required="true" ng-model="user.model.password">
+                    </lx-text-field>
+
+                    <label ng-if="new_user_form.password.$error.required && new_user_form.password.$dirty" style="color:red">El campo es requerido</label>
+
+                    <label ng-if="new_user_form.email.$error.required && new_user_form.email.$dirty" style="color:red">El campo es requerido</label>
+                    <br>
+                    <lx-button type="submit" ng-disabled="new_user_form.$invalid" lx-type="raised" ng-click="user.save(user.model)">Guardar</lx-button>
+                </div>
+              </form>
+          </lx-dialog-content>
+    </lx-dialog>
