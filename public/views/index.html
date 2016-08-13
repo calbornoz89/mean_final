@@ -48,10 +48,20 @@
     <div class="p+">
           <div class="card">
 
+            <div class="p+" ng-controller="mainCtrl as main">
+                <lx-button lx-type="flat" ng-click="main.goTo('/users')" ng-if="main.loggedIn">Usuarios</lx-button>
+                <lx-button lx-type="flat" ng-click="main.goTo('/pokemons')" ng-if="main.loggedIn">Pokemons</lx-button>
+                <lx-button lx-type="flat" ng-click="main.logout()" ng-if="main.loggedIn">Salir</lx-button>
+            </div>
+
+
               <div flex-container="row">
                   <div flex-item flex-container="column">
                       <div flex-item>
                           <div class="p+">
+
+
+
                               <div ng-view></div>
                           </div>
                       </div>

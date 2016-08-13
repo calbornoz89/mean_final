@@ -18,8 +18,11 @@ angular.module('pokeApp.authServices',[])
 
   this.logout = function(){
     AuthToken.setToken();
+    // location.reload();
+    console.log('ya salio')
     $location.path('/login');
 
+    // location.reload();
   }
 
   this.isLoggedIn = function(){
@@ -60,12 +63,14 @@ angular.module('pokeApp.authServices',[])
 })
 
 .service('AuthInterceptor', function($q, $location, AuthToken){
+
   this.request = function(config){
     var token = AuthToken.getToken();
 
     if(token){
       config.headers['x-access-token'] = token;
     }
+
     return config;
 
   }

@@ -10,6 +10,8 @@ vm.login = function(username,password) {
   }
 
 
+
+
 // vm => viewModel
 //   vm.getPokemons = function(){
 //     $http
