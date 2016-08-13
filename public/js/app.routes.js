@@ -41,6 +41,7 @@ angular.module('pokeApp.routes',['ngRoute'])
 })
 .constant('GlobalInfo',
        {
-           apiUrl: 'http://localhost:5000/api'
+          //  apiUrl: 'http://localhost:5000/api'
            //apiUrl:http://curso-mean-henry.herokuapp.com/
+           apiUrl: 'https://mean-cal.herokuapp.com'
        });
